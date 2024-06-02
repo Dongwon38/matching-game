@@ -1,0 +1,40 @@
+* {
+  border: 1px solid black;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  margin: 20px 0;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 21.875rem 1fr 21.875rem;
+  background-color: antiquewhite;
+}
+
+/* card ratio 58 : 88 */
+.cards-plate {
+  display: grid;
+  grid-template-columns: repeat(6, 7.25rem);
+  grid-template-rows: repeat(3, 11rem);
+  gap: 10px;
+  margin: 20px;
+  padding: 20px;
+}
+
+.card back {
+  background-color: gold;
+}
+
+.card front {
+  background-color: chartreuse;
+}
+
+/* table */
+
+.table {
+  margin: 20px;
+  padding: 20px;
+}
