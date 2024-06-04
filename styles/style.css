@@ -35,7 +35,7 @@ ul {
   background-color: gold;
   /* flip effect */
   backface-visibility: hidden;
-  transition-duration: 0.5s;
+  transition-duration: 0.1s;
 }
 
 .front {
@@ -43,7 +43,7 @@ ul {
   /* flip effect */
   backface-visibility: hidden;
   transform: rotateY(180deg);
-  transition-duration: 0.5s;
+  transition-duration: 0.1s;
 }
 
 /* table */

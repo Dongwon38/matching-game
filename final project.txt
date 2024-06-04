@@ -1,0 +1,25 @@
+올카드 / 픽덱 / 언픽덱
+const 언픽덱
+올카드. foreach((item) => {
+ if ( 픽덱.find(item) == 픽덱에 없다
+그러면 언픽덱.push(item)
+ 첫번째 카드 = 언픽덱 중 하나 뽑기
+})
+
+ 
+
+
+두번째 카드 뽑기
+
+
+
+Matching Game | Game Parameters
+#Create a single player game where the user must match pairs of hidden pictures on a grid of at least 12 squares. 
+#The player can reveal the pictures hidden behind each square by clicking on the square. 
+#The player can reveal up to two pictures in a turn. 
+#If the player reveals two pictures that are the same in a turn, then the pictures remain revealed. 
+#If the player reveals two pictures that are not the same, then the pictures return to being hidden after a certain amount of time. 
+#If a user clicks on an already revealed picture than nothing should happen The game is completed when the user has matched all the pairs of pictures. 
+#The game should keep track and display to the user the number of turns he/she has taken. 
+#The game should keep track and display to the user the number of matches he/she has. 
+#The game should have a button that starts the game The user should have the ability to end the game at any time 

@@ -1,16 +1,28 @@
 // setting the game
 const cards = document.querySelectorAll(".card");
+const allCards = [];
+
+function addCard(number, value) {
+  allCards.push({
+    cardNumber: Number(number),
+    cardValue: value,
+    count: 0,
+    isOpen: false,
+  });
+}
 
 // give an id and img for each cards
 cards.forEach((card, index) => {
-  const cardback = card.querySelector(".back");
   const cardfront = card.querySelector(".front");
-  cardback.id = index + 1;
-  const imgPath = Math.round(cardback.id / 2);
+  card.id = index + 1;
+  const imgPath = Math.round(card.id / 2);
   const img = new Image();
   img.src = `images/0${imgPath}.jpg`;
   cardfront.appendChild(img);
+  addCard(card.id, imgPath);
 });
+
+console.log(allCards);
 
 // random shuffle
 cards.forEach((card) => {
@@ -35,32 +47,98 @@ let player = "";
 let computer = "";
 
 function startGame() {
-  player = new Player(
-    "test Player"
-    // prompt("Enter player's name:")
-  );
+  player = new Player("test Player");
   computer = new Player("computer bot 1.0");
-  console.log(player, computer);
 }
 
 startGame();
 
 // create boxes for selection&comparison
-let firstSelectedCard = "";
-let secondSelectedCard = "";
-let firstCardElement = null;
-let secondCardElement = null;
+let firstCard = "";
+let secondCard = "";
 let disableCard = false;
-let openedCards = [];
-console.log(openedCards);
 
 // reset
 function resetSelection() {
-  firstSelectedCard = "";
-  secondSelectedCard = "";
-  firstCardElement = null;
-  secondCardElement = null;
+  firstCard = "";
+  secondCard = "";
   disableCard = false;
+}
+
+function flipCard(card) {
+  const cardback = card.querySelector(".back");
+  const cardfront = card.querySelector(".front");
+  cardback.style.transform = "rotateY(180deg)";
+  cardfront.style.transform = "rotateY(0deg)";
+}
+
+function unflipCard(card) {
+  const cardback = card.querySelector(".back");
+  const cardfront = card.querySelector(".front");
+  cardback.style.transform = "rotateY(0deg)";
+  cardfront.style.transform = "rotateY(180deg)";
+}
+
+//computer turn
+function computerTurn() {
+  setTimeout(() => {
+    // set card deck for picking
+    const cardDeck = [];
+    allCards.forEach((card) => {
+      if (!card.isOpen) {
+        cardDeck.push(card);
+      }
+    });
+
+    let botFirstPick = "";
+    let botSecondPick = "";
+    let botFirstPickDiv = "";
+    let botSecondPickDiv = "";
+
+    // first pick
+    setTimeout(() => {
+      botFirstPick = cardDeck[Math.floor(Math.random() * cardDeck.length)];
+      botFirstPickDiv = document.getElementById(`${botFirstPick.cardNumber}`);
+      flipCard(botFirstPickDiv);
+
+      // second pick
+      setTimeout(() => {
+        // prevent for picking the same card
+        do {
+          botSecondPick = cardDeck[Math.floor(Math.random() * cardDeck.length)];
+          botSecondPickDiv = document.getElementById(
+            `${botSecondPick.cardNumber}`
+          );
+          flipCard(botSecondPickDiv);
+        } while (!botFirstPick.cardValue == botSecondPick.cardValue);
+
+        console.log(botFirstPick);
+        console.log(botSecondPick);
+        console.log(cardDeck);
+        // comparison
+        if (botFirstPick.cardValue == botSecondPick.cardValue) {
+          console.log("computer got one point");
+          computer.getPoint();
+        } else {
+          console.log("computer got no point");
+          botFirstPick.count += 1;
+          botSecondPick.count += 1;
+          setTimeout(() => {
+            unflipCard(document.getElementById(`${botFirstPick.cardNumber}`));
+            unflipCard(document.getElementById(`${botSecondPick.cardNumber}`));
+            resetSelection();
+          }, 1000);
+        }
+        // step 4
+        setTimeout(() => {
+          console.log("now computer three");
+          setTimeout(() => {
+            console.log("now your turn");
+          }, Math.random() * 1000);
+        }, Math.random() * 1000);
+      }, Math.random() * 1000);
+    }, Math.random() * 1000);
+  }, Math.random() * 1000);
 }
 
 //selecting function
@@ -68,61 +146,57 @@ cards.forEach((card) => {
   card.addEventListener("click", () => {
     // pause for reset
     if (disableCard) return;
-    // prevent to select the same card
-    if (card === firstCardElement) return;
-
-    const cardback = card.querySelector(".back");
-    const cardfront = card.querySelector(".front");
-    const cardImg = cardfront.querySelector("img");
-
-    cardback.style.transform = "rotateY(180deg)";
-    cardfront.style.transform = "rotateY(0deg)";
+    // prevent to select the opened card
+    if (allCards[card.id - 1].isOpen) {
+      console.log("error");
+      resetSelection();
+      return;
+    }
+    disableCard = true;
 
     // first selection
-    if (!firstSelectedCard) {
-      firstSelectedCard = cardImg.src;
-      firstCardElement = card;
-      console.log("First card selected:", firstSelectedCard);
-    }
-    // second selection
-    else if (!secondSelectedCard) {
-      secondSelectedCard = cardImg.src;
-      secondCardElement = card;
-      console.log("Second card selected:", secondSelectedCard);
+    if (!firstCard) {
+      flipCard(card);
+      firstCard = allCards[card.id - 1];
+      disableCard = false;
+    } else {
+      flipCard(card);
+      secondCard = allCards[card.id - 1];
 
-      // then, comparison
-      if (firstSelectedCard === secondSelectedCard) {
-        openedCards.push(firstSelectedCard);
-        openedCards.push(secondSelectedCard);
+      // if it is a pair
+      if (firstCard.cardValue === secondCard.cardValue) {
+        console.log("You got one point");
+        firstCard.isOpen = true;
+        secondCard.isOpen = true;
         player.getPoint();
-        console.log(player, "You got one point");
         resetSelection();
-      } else {
-        console.log("You were wrong");
         disableCard = true;
         setTimeout(() => {
-          // reset if it is not a pair
-          firstCardElement.querySelector(".back").style.transform =
-            "rotateY(0deg)";
-          firstCardElement.querySelector(".front").style.transform =
-            "rotateY(180deg)";
-          secondCardElement.querySelector(".back").style.transform =
-            "rotateY(0deg)";
-          secondCardElement.querySelector(".front").style.transform =
-            "rotateY(180deg)";
-          resetSelection();
+          computerTurn();
         }, 1000);
       }
-      if (openedCards.length == 18) {
-        console.log("game over");
+      // if it is not
+      else {
+        console.log("You were wrong");
+        // count
+        firstCard.count += 1;
+        secondCard.count += 1;
+        disableCard = true;
+        setTimeout(() => {
+          // reset
+          unflipCard(document.getElementById(`${firstCard.cardNumber}`));
+          unflipCard(document.getElementById(`${secondCard.cardNumber}`));
+          resetSelection();
+          disableCard = true;
+          computerTurn();
+        }, 1000);
       }
     }
   });
 });
 
-// 컴퓨터 만드는 법
-// 내 턴이 끝났음을 확인
-// 몇 초 후 첫번째 카드 오픈
-// 몇 초 후 두번째 카드 오픈
-// 두카드 비교해서 맞으면 컴퓨터 점수 상승
-// 틀리면 리셋 후 플레이어 턴
+// if (pickedCards.length == 18) {
+//   console.log("game over");
+// }
+
+// 빠르게 클릭했을 때 점수 얻는 문제
