@@ -1,6 +1,9 @@
+"use strict";
+
 // setting the game
 const cards = document.querySelectorAll(".card");
 const allCards = [];
+let turn = 1;
 
 function addCard(number, value) {
   allCards.push({
@@ -22,8 +25,6 @@ cards.forEach((card, index) => {
   addCard(card.id, imgPath);
 });
 
-console.log(allCards);
-
 // random shuffle
 cards.forEach((card) => {
   card.style.order = Math.floor(Math.random() * 100);
@@ -35,11 +36,11 @@ cards.forEach((card) => {
 class Player {
   constructor(name) {
     this.name = name;
-    this.point = 0;
+    this.score = 0;
   }
 
   getPoint() {
-    this.point += 1;
+    this.score += 1;
   }
 }
 
@@ -48,7 +49,11 @@ let computer = "";
 
 function startGame() {
   player = new Player("test Player");
-  computer = new Player("computer bot 1.0");
+  computer = new Player("bot 1.0");
+  document.getElementById("player-name").innerHTML = player.name;
+  document.getElementById("computer-name").innerHTML = computer.name;
+  document.getElementById("player-score").innerHTML = player.score;
+  document.getElementById("computer-score").innerHTML = computer.score;
 }
 
 startGame();
@@ -56,34 +61,40 @@ startGame();
 // create boxes for selection&comparison
 let firstCard = "";
 let secondCard = "";
-let disableCard = false;
+let lockCards = false;
 
 // reset
 function resetSelection() {
   firstCard = "";
   secondCard = "";
-  disableCard = false;
+  lockCards = false;
 }
 
+// end game
+function endGame() {
+  console.log("game over");
+}
+
+// flip card
 function flipCard(card) {
   const cardback = card.querySelector(".back");
   const cardfront = card.querySelector(".front");
-  cardback.style.transform = "rotateY(180deg)";
-  cardfront.style.transform = "rotateY(0deg)";
+  cardback.classList.add("toback");
+  cardfront.classList.add("tofront");
 }
 
 function unflipCard(card) {
   const cardback = card.querySelector(".back");
   const cardfront = card.querySelector(".front");
-  cardback.style.transform = "rotateY(0deg)";
-  cardfront.style.transform = "rotateY(180deg)";
+  cardback.classList.remove("toback");
+  cardfront.classList.remove("tofront");
 }
 
 //computer turn
 function computerTurn() {
+  // step1 set card deck for picking
   setTimeout(() => {
-    // set card deck for picking
-    const cardDeck = [];
+    let cardDeck = [];
     allCards.forEach((card) => {
       if (!card.isOpen) {
         cardDeck.push(card);
@@ -95,108 +106,134 @@ function computerTurn() {
     let botFirstPickDiv = "";
     let botSecondPickDiv = "";
 
-    // first pick
+    // step2 first pick
     setTimeout(() => {
       botFirstPick = cardDeck[Math.floor(Math.random() * cardDeck.length)];
       botFirstPickDiv = document.getElementById(`${botFirstPick.cardNumber}`);
       flipCard(botFirstPickDiv);
+      console.log("1st pick:", botFirstPick);
 
-      // second pick
+      //remove first picked card from array
+      cardDeck = cardDeck.filter(
+        (card) => card.cardNumber !== botFirstPick.cardNumber
+      );
+
+      // find a pair card
+      let paircard = [];
+      function isSame(card) {
+        if (card.cardValue === botFirstPick.cardValue) return true;
+      }
+      paircard = cardDeck.find(isSame);
+
+      // step3 2nd picking after a sec
       setTimeout(() => {
-        // prevent for picking the same card
-        do {
+        if (botFirstPick.count + paircard.count >= 3) {
+          // if it has been seen more than 3, direct pick
+          botSecondPick = paircard;
+          botSecondPickDiv = document.getElementById(
+            `${botSecondPick.cardNumber}`
+          );
+          flipCard(botSecondPickDiv);
+          console.log("2nd pick: direct picking", botSecondPick);
+        } else {
+          // normal random pick
           botSecondPick = cardDeck[Math.floor(Math.random() * cardDeck.length)];
           botSecondPickDiv = document.getElementById(
             `${botSecondPick.cardNumber}`
           );
           flipCard(botSecondPickDiv);
-        } while (!botFirstPick.cardValue == botSecondPick.cardValue);
+          console.log("2nd pick: normal picking", botSecondPick);
+        }
 
-        console.log(botFirstPick);
-        console.log(botSecondPick);
-        console.log(cardDeck);
-        // comparison
-        if (botFirstPick.cardValue == botSecondPick.cardValue) {
-          console.log("computer got one point");
-          computer.getPoint();
-        } else {
-          console.log("computer got no point");
-          botFirstPick.count += 1;
-          botSecondPick.count += 1;
-          setTimeout(() => {
+        // step4 comparison after a sec
+        setTimeout(() => {
+          if (botFirstPick.cardValue == botSecondPick.cardValue) {
+            console.log("computer got one point");
+            botFirstPick.isOpen = true;
+            botSecondPick.isOpen = true;
+            computer.getPoint();
+            document.getElementById("computer-score").innerHTML =
+              computer.score;
+          } else {
+            console.log("computer got no point");
+            botFirstPick.count += 1;
+            botSecondPick.count += 1;
             unflipCard(document.getElementById(`${botFirstPick.cardNumber}`));
             unflipCard(document.getElementById(`${botSecondPick.cardNumber}`));
-            resetSelection();
-          }, 1000);
-        }
-        // step 4
-        setTimeout(() => {
-          console.log("now computer three");
+          }
+          // step5 turn over after a sec
           setTimeout(() => {
-            console.log("now your turn");
-          }, Math.random() * 1000);
-        }, Math.random() * 1000);
-      }, Math.random() * 1000);
-    }, Math.random() * 1000);
-  }, Math.random() * 1000);
+            if (player.score + computer.score == 9) {
+              endGame();
+            } else {
+              turn += 1;
+              console.log("now your turn");
+              resetSelection();
+              lockCards = false;
+            }
+          }, 1000); // step 5
+        }, 1000); // step 4
+      }, 1000); // step 3
+    }, 1000); // step 2
+  }, 1000); // step 1
 }
 
 //selecting function
 cards.forEach((card) => {
   card.addEventListener("click", () => {
-    // pause for reset
-    if (disableCard) return;
-    // prevent to select the opened card
-    if (allCards[card.id - 1].isOpen) {
-      console.log("error");
-      resetSelection();
-      return;
-    }
-    disableCard = true;
+    if (card.children[0].classList.contains("toback")) return;
+    if (lockCards) return;
+    lockCards = true;
 
     // first selection
     if (!firstCard) {
       flipCard(card);
       firstCard = allCards[card.id - 1];
-      disableCard = false;
+      lockCards = false;
     } else {
       flipCard(card);
+      lockCards = true;
       secondCard = allCards[card.id - 1];
 
-      // if it is a pair
-      if (firstCard.cardValue === secondCard.cardValue) {
-        console.log("You got one point");
-        firstCard.isOpen = true;
-        secondCard.isOpen = true;
-        player.getPoint();
-        resetSelection();
-        disableCard = true;
-        setTimeout(() => {
-          computerTurn();
-        }, 1000);
-      }
-      // if it is not
-      else {
-        console.log("You were wrong");
-        // count
-        firstCard.count += 1;
-        secondCard.count += 1;
-        disableCard = true;
-        setTimeout(() => {
-          // reset
-          unflipCard(document.getElementById(`${firstCard.cardNumber}`));
-          unflipCard(document.getElementById(`${secondCard.cardNumber}`));
+      // comparison
+      setTimeout(() => {
+        if (firstCard.cardValue === secondCard.cardValue) {
+          console.log("You got one point");
+          firstCard.isOpen = true;
+          secondCard.isOpen = true;
+          player.getPoint();
+          document.getElementById("player-score").innerHTML = player.score;
           resetSelection();
-          disableCard = true;
-          computerTurn();
+          lockCards = true;
+        } else {
+          console.log("You were wrong");
+          // count
+          firstCard.count += 1;
+          secondCard.count += 1;
+          // reset
+          setTimeout(() => {
+            unflipCard(document.getElementById(`${firstCard.cardNumber}`));
+            unflipCard(document.getElementById(`${secondCard.cardNumber}`));
+            resetSelection();
+            lockCards = true;
+          }, 1000);
+        }
+        setTimeout(() => {
+          if (player.score + computer.score == 9) {
+            endGame();
+          } else {
+            turn += 1;
+            console.log("now computer turn");
+            computerTurn();
+          }
         }, 1000);
-      }
+      }, 1000);
     }
   });
 });
 
-// if (pickedCards.length == 18) {
-//   console.log("game over");
-// }
+console.log(allCards);
 
-// 빠르게 클릭했을 때 점수 얻는 문제
+// if (pickedCards.length == 18) {
+
+// }

@@ -33,17 +33,23 @@ ul {
   width: 100%;
   height: 100%;
   background-color: gold;
-  /* flip effect */
   backface-visibility: hidden;
   transition-duration: 0.1s;
 }
 
 .front {
   position: absolute;
-  /* flip effect */
-  backface-visibility: hidden;
   transform: rotateY(180deg);
+  backface-visibility: hidden;
   transition-duration: 0.1s;
+}
+
+.tofront {
+  transform: rotateY(0deg);
+}
+
+.toback {
+  transform: rotateY(180deg);
 }
 
 /* table */
