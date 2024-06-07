@@ -6,120 +6,166 @@
     <link rel="stylesheet" href="styles/normalize-fwd.css" />
     <link rel="stylesheet" href="styles/style.css" />
     <script defer src="scripts/script.js"></script>
+    <script defer src="scripts/script-style.js"></script>
     <title>Matching Game</title>
   </head>
   <body>
-    <header>
-      <nav>
-        <ul>
-          <li>start</li>
-          <li>give up</li>
-          <li>setting</li>
-        </ul>
-      </nav>
-    </header>
-    <div class="wrapper">
-      <div class="table player">
-        <div id="player-name"></div>
-        <div id="player-score"></div>
+    <div id="page-start" class="page-start">
+      <div class="title">
+        <h1>matching game in bcit</h1>
+        <span id="btn-start" class="btn-blue"
+          ><p>register now</p>
+          <p>></p></span
+        >
+      </div>
+      <img src="images/ui/bg-01a.jpg" />
+    </div>
+    <div id="page-register" class="page-register fade-out offscreen">
+      <div class="registeration">
+        <div class="reg-left">
+          <h2>registeration</h2>
+          <h2>Advanced .NET Development</h2>
+          <p>Associate Certificate | One-time | School of Computing</p>
+        </div>
+        <div class="reg-right">
+          <label for="student-name">Student Name</label>
+          <input id="student-name" type="text" />
+          <label for="instructor">Choose your Instructor</label>
+          <div>
+            <span>
+              <input
+                type="radio"
+                name="instructor"
+                id="instructor-michel"
+              />Michel
+            </span>
+            <span>
+              <input
+                type="radio"
+                name="instructor"
+                id="instructor-randy"
+              />Randy
+            </span>
+          </div>
+          <div id="btn-submit" class="btn-blue">Submit</div>
+        </div>
       </div>
 
-      <div class="cards-plate">
-        <div class="card">
-          1
-          <div class="back"></div>
-          <div class="front"></div>
+      <img src="images/ui/bg-registera.jpg" />
+    </div>
+    <div id="page-in-game" class="page-in-game fade-out offscreen">
+      <header>
+        <nav>
+          <ul>
+            <li>start</li>
+            <li>give up</li>
+            <li>setting</li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <div class="table player">
+          <div id="player-name"></div>
+          <div id="player-score"></div>
         </div>
-        <div class="card">
-          2
-          <div class="back"></div>
-          <div class="front"></div>
+
+        <div class="cards-plate">
+          <div class="card">
+            1
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            2
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            3
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            4
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            5
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            6
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            7
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            8
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            9
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            10
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            11
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            12
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            13
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            14
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            15
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            16
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            17
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
+          <div class="card">
+            18
+            <div class="back"></div>
+            <div class="front"></div>
+          </div>
         </div>
-        <div class="card">
-          3
-          <div class="back"></div>
-          <div class="front"></div>
+        <div class="table computer">
+          <div id="computer-name"></div>
+          <div id="computer-score"></div>
         </div>
-        <div class="card">
-          4
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          5
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          6
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          7
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          8
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          9
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          10
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          11
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          12
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          13
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          14
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          15
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          16
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          17
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-        <div class="card">
-          18
-          <div class="back"></div>
-          <div class="front"></div>
-        </div>
-      </div>
-      <div class="table computer">
-        <div id="computer-name"></div>
-        <div id="computer-score"></div>
-      </div>
+      </main>
     </div>
   </body>
 </html>

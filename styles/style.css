@@ -1,18 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
 * {
-  border: 1px solid black;
+  /* border: 1px solid black; */
+}
+
+body {
+  background-color: black;
+  overflow: hidden;
+  font-family: "DM Sans", sans-serif;
+}
+
+p {
+  margin: 0;
+}
+img {
+  display: block;
 }
 
 ul {
   list-style: none;
   display: flex;
-  margin: 20px 0;
+  margin: 0;
 }
 
-.wrapper {
+main {
   display: grid;
   grid-template-columns: 21.875rem 1fr 21.875rem;
   background-color: antiquewhite;
 }
+
+/* page transition */
+
+.fade-out {
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: 0.4s;
+}
+
+.offscreen {
+  display: none !important;
+}
+
+/* start page */
+
+.page-start {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.page-start img,
+.page-register img {
+  width: 100%;
+  object-fit: cover;
+  filter: brightness(50%);
+}
+
+.title,
+.registeration {
+  position: absolute;
+  z-index: 2;
+  width: 50rem;
+  margin-top: 5rem;
+  text-transform: uppercase;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin-top: 0rem;
+  font-size: 3.375rem;
+  width: 30rem;
+  text-align: center;
+}
+
+/* register page */
+
+.page-register {
+  width: 100vw;
+  height: 100vh;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+}
+
+.registeration {
+  width: 90%;
+  border: 1px solid white;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 20px;
+}
+
+.reg-left,
+.reg-right {
+  width: 50%;
+}
+
+.reg-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* btn start */
+.title span,
+.btn-blue {
+  display: flex;
+  justify-content: space-between;
+  margin: 5rem;
+  padding: 15px 15px;
+  border: 1px solid white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: 0.1s;
+}
+.title span {
+  width: 180px;
+}
+
+.btn-blue {
+  text-align: center;
+  width: 80px;
+}
+
+.title p {
+  display: inline;
+}
+
+.hover {
+  background-color: #0069ff;
+  border-color: #0069ff !important;
+  transition: 0.1s;
+  cursor: pointer;
+}
+/* btn end */
 
 /* card ratio 58 : 88 */
 .cards-plate {
