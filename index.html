@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/normalize-fwd.css" />
     <link rel="stylesheet" href="styles/style.css" />
-    <script defer src="scripts/script.js"></script>
     <script defer src="scripts/script-style.js"></script>
+    <script defer src="scripts/script.js"></script>
     <title>Matching Game</title>
   </head>
   <body>
-    <div id="page-start" class="page-start">
+    <div id="page-start" class="page-start fade-in">
       <div class="title">
-        <h1>matching game in bcit</h1>
+        <h1>MATCHING Game at BCIT</h1>
         <span id="btn-start" class="btn-blue"
           ><p>register now</p>
           <p>></p></span
@@ -22,50 +22,83 @@
     </div>
     <div id="page-register" class="page-register fade-out offscreen">
       <div class="registeration">
-        <div class="reg-left">
-          <h2>registeration</h2>
-          <h2>Advanced .NET Development</h2>
-          <p>Associate Certificate | One-time | School of Computing</p>
-        </div>
-        <div class="reg-right">
-          <label for="student-name">Student Name</label>
-          <input id="student-name" type="text" />
-          <label for="instructor">Choose your Instructor</label>
-          <div>
-            <span>
-              <input
-                type="radio"
-                name="instructor"
-                id="instructor-michel"
-              />Michel
-            </span>
-            <span>
-              <input
-                type="radio"
-                name="instructor"
-                id="instructor-randy"
-              />Randy
-            </span>
+        <div class="reg-top"><h2>registeration</h2></div>
+        <div class="reg-center">
+          <div class="reg-left">
+            <h3>Advanced Matching-Intelligence Development</h3>
+            <p>
+              masters | docorate degree / One-time / School of Computing and
+              Academic Studies
+            </p>
           </div>
+          <div class="reg-right">
+            <label for="student-name">Student Name</label>
+            <input id="student-name" type="text" />
+            <label for="instructor">Choose your Instructor</label>
+            <div id="teachers" class="teachers">
+              <span class="profile">
+                <img src="images/ui/michael-0.jpg" />
+                <input
+                  type="radio"
+                  name="instructor"
+                  id="instructor-michel"
+                  value="Michael Chow"
+                  checked
+                />Michael
+              </span>
+              <span class="profile">
+                <img src="images/ui/randy-0.jpg" />
+                <input
+                  type="radio"
+                  name="instructor"
+                  id="instructor-randy"
+                  value="Randy Gulak"
+                />Randy
+              </span>
+            </div>
+            <label for="difficulty">Choose your Degree</label>
+            <div id="difficulty-box" class="difficulty-box">
+              <span class="difficulty-line"
+                ><input
+                  type="radio"
+                  name="difficulty"
+                  id="difficulty-master"
+                  value="master"
+                  checked
+                />Masters</span
+              >
+              <span class="difficulty-line"
+                ><input
+                  type="radio"
+                  name="difficulty"
+                  id="difficulty-phd"
+                  value="doctorate"
+                />Doctorate</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="reg-bottom">
           <div id="btn-submit" class="btn-blue">Submit</div>
         </div>
       </div>
-
       <img src="images/ui/bg-registera.jpg" />
     </div>
     <div id="page-in-game" class="page-in-game fade-out offscreen">
       <header>
         <nav>
           <ul>
-            <li>start</li>
-            <li>give up</li>
-            <li>setting</li>
+            <li><a href="https://www.bcit.ca/">bcit</a></li>
+            <li>turn: <span id="turn-board">1</span></li>
+            <li id="btn-endgame">drop the course</li>
           </ul>
         </nav>
       </header>
       <main>
         <div class="table player">
+          <div class="label">Student</div>
           <div id="player-name"></div>
+          <div class="label">Score</div>
           <div id="player-score"></div>
         </div>
 
@@ -162,8 +195,20 @@
           </div>
         </div>
         <div class="table computer">
+          <div class="label">Instructor</div>
           <div id="computer-name"></div>
+          <div class="label">Score</div>
           <div id="computer-score"></div>
+          <div id="computer-photo">
+            <img src="images/ui/michael-0.jpg" />
+          </div>
+          <div id="txtcontainer" class="">
+            <img src="images/ui/txtbox.jpg" />
+            <p id="txtcontent">
+              If you beat me, I'll give you an extension for the next
+              assignment.
+            </p>
+          </div>
         </div>
       </main>
     </div>

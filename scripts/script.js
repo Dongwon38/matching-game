@@ -3,6 +3,7 @@
 // setting the game
 const cards = document.querySelectorAll(".card");
 const allCards = [];
+const turnBoard = document.getElementById("turn-board");
 let turn = 1;
 
 function addCard(number, value) {
@@ -41,6 +42,9 @@ class Player {
 
   getPoint() {
     this.score += 1;
+    if (this.score > 1) {
+      console.log(this.name + "win!");
+    }
   }
 }
 
@@ -152,6 +156,11 @@ function computerTurn() {
             botFirstPick.isOpen = true;
             botSecondPick.isOpen = true;
             computer.getPoint();
+            if (computerName.innerHTML == "Michael Chow") {
+              txtPopUp(txtMichael);
+            } else {
+              txtPopUp(txtRandy);
+            }
             document.getElementById("computer-score").innerHTML =
               computer.score;
           } else {
@@ -167,6 +176,7 @@ function computerTurn() {
               endGame();
             } else {
               turn += 1;
+              turnBoard.innerText = turn;
               console.log("now your turn");
               resetSelection();
               lockCards = false;
@@ -227,13 +237,10 @@ cards.forEach((card) => {
             computerTurn();
           }
         }, 1000);
-      }, 1000);
+      }, 100);
     }
   });
 });
 
-console.log(allCards);
-
-// if (pickedCards.length == 18) {
-
-// }
+// for restart
+// window.location.reload("true");
