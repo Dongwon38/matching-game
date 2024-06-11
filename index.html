@@ -27,13 +27,13 @@
           <div class="reg-left">
             <h3>Advanced Matching-Intelligence Development</h3>
             <p>
-              masters | docorate degree / One-time / School of Computing and
+              Certificate | Master degree / One-time / School of Computing and
               Academic Studies
             </p>
           </div>
           <div class="reg-right">
             <label for="student-name">Student Name</label>
-            <input id="student-name" type="text" />
+            <input id="student-name" type="text" value="John" />
             <label for="instructor">Choose your Instructor</label>
             <div id="teachers" class="teachers">
               <span class="profile">
@@ -56,24 +56,24 @@
                 />Randy
               </span>
             </div>
-            <label for="difficulty">Choose your Degree</label>
+            <label for="difficulty">Choose your Degree (Game level)</label>
             <div id="difficulty-box" class="difficulty-box">
+              <span class="difficulty-line"
+                ><input
+                  type="radio"
+                  name="difficulty"
+                  id="difficulty-cert"
+                  value="certificate"
+                  checked
+                />Certificate (Medium)</span
+              >
               <span class="difficulty-line"
                 ><input
                   type="radio"
                   name="difficulty"
                   id="difficulty-master"
                   value="master"
-                  checked
-                />Masters</span
-              >
-              <span class="difficulty-line"
-                ><input
-                  type="radio"
-                  name="difficulty"
-                  id="difficulty-phd"
-                  value="doctorate"
-                />Doctorate</span
+                />Master Degree (Hard)</span
               >
             </div>
           </div>
@@ -91,14 +91,16 @@
             <li><a href="https://www.bcit.ca/">bcit</a></li>
             <li>turn: <span id="turn-board">1</span></li>
             <li>Course: <span id="level"></span></li>
-            <li id="btn-endgame">drop the course</li>
+            <li id="btn-endgame">drop the course (exit)</li>
           </ul>
         </nav>
         <div id="confirmDialog" class="modal">
           <div class="modal-content">
-            <p>Are you sure you want to continue?</p>
-            <button id="confirmYes">Yes</button>
-            <button id="confirmNo">No</button>
+            <p>Are you sure you want to drop the course?</p>
+            <p>(You won't get a refund)</p>
+
+            <button id="confirmYes">never mind!</button>
+            <button id="confirmNo">no way...</button>
           </div>
         </div>
       </header>
@@ -111,92 +113,74 @@
         </div>
         <div class="cards-plate">
           <div class="card">
-            1
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            2
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            3
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            4
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            5
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            6
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            7
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            8
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            9
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            10
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            11
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            12
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            13
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            14
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            15
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            16
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            17
             <div class="back"></div>
             <div class="front"></div>
           </div>
           <div class="card">
-            18
             <div class="back"></div>
             <div class="front"></div>
           </div>
@@ -213,6 +197,12 @@
             <p id="txtcontent"></p>
           </div>
         </div>
+        <section id="end-popup" class="modal">
+          <div class="end-box">
+            <p id="end-comment" class="end-comment"></p>
+            <div id="btn-gohome" class="btn-blue">Go Home</div>
+          </div>
+        </section>
       </main>
     </div>
   </body>

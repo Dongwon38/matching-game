@@ -69,6 +69,7 @@ difficultyLines.forEach((line) => {
 
 // submit - info
 let difficulty = "";
+let difficultyNumber = "2";
 
 btnSubmit.addEventListener("click", () => {
   playerName.innerHTML = inputName.value;
@@ -81,13 +82,15 @@ btnSubmit.addEventListener("click", () => {
   //select difficulty
   if (
     difficultyBox.querySelector('input[name="difficulty"]:checked').value ==
-    "master"
+    "certificate"
   ) {
+    difficulty = "certificate";
+    level.innerHTML = "Certificate";
+    difficultyNumber = "2";
+  } else {
     difficulty = "master";
     level.innerHTML = "Master";
-  } else {
-    difficulty = "doctorate";
-    level.innerHTML = "Doctorate";
+    difficultyNumber = "1";
   }
 
   cards.forEach((card, index) => {
@@ -95,7 +98,7 @@ btnSubmit.addEventListener("click", () => {
     card.id = index + 1;
     const imgPath = Math.round(card.id / 2);
     const img = new Image();
-    if (difficulty == "master") {
+    if (difficulty == "certificate") {
       console.log("yes");
       img.src = `images/img-1/0${imgPath}.png`;
     } else {
@@ -126,18 +129,18 @@ const txtContent = document.getElementById("txtcontent");
 const txtMichael = [
   "I'm not joking.",
   "Time is money.",
-  "If you lose, You will get ZERO!",
+  "If you lose, You will get ZERO!!!",
   "shift! shift! shift! shift!",
   "If you beat me, I'll give you an extension.",
-  "It is what it is",
-  "What the hack!",
-  "Don't ask me why",
+  "It is what it is.",
+  "What the hack!!!",
+  "Don't ask me why.",
 ];
 
 const txtRandy = [
-  "Bang on!",
-  "Sweeeeet.",
-  "Buckle up! Next one is a little bit spicy.",
+  "Bang on!!!",
+  "Sweeeeeeet.",
+  "Buckle up! Next one will be a little bit spicy.",
   "Any thoughts or questions on this?",
   "Anybody?",
   "Does that make sense?",
@@ -175,17 +178,23 @@ btnEndgame.addEventListener("click", () => {
 });
 
 // confirm
-document.getElementById("confirmYes").addEventListener("click", function () {
+document.getElementById("confirmYes").addEventListener("click", () => {
   document.getElementById("confirmDialog").style.display = "none";
   window.location.reload("true");
 });
 
-document.getElementById("confirmNo").addEventListener("click", function () {
+document.getElementById("confirmNo").addEventListener("click", () => {
   document.getElementById("confirmDialog").style.display = "none";
 });
 
-window.addEventListener("click", function (event) {
+window.addEventListener("click", (event) => {
   if (event.target === document.getElementById("confirmDialog")) {
     document.getElementById("confirmDialog").style.display = "none";
   }
+});
+
+const btngoHome = document.getElementById("btn-gohome");
+
+btngoHome.addEventListener("click", () => {
+  window.location.reload("true");
 });

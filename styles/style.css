@@ -71,7 +71,7 @@ img {
 .registeration {
   position: absolute;
   z-index: 2;
-  width: 50rem;
+  width: 60rem;
   margin-top: 5rem;
   text-transform: uppercase;
   color: white;
@@ -97,7 +97,7 @@ img {
   margin: 5rem 0;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1rem;
 }
 .reg-top,
 .reg-bottom {
@@ -116,7 +116,7 @@ img {
   flex-direction: row;
   align-items: flex-start;
   margin: 1.5rem 0 0.5rem 0;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 .reg-center h3 {
@@ -235,7 +235,7 @@ img {
 }
 
 .page-in-game li {
-  padding: 1rem 1rem;
+  padding: 1rem;
   text-align: center;
   font-weight: 900;
 }
@@ -329,7 +329,7 @@ main {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #fff400;
+  background-color: gold;
   backface-visibility: hidden;
   transition-duration: 0.1s;
 }
@@ -360,27 +360,56 @@ main {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
+  background-color: black;
   background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 20% auto;
   padding: 20px;
-  border: 1px solid #888;
   width: 80%;
   max-width: 300px;
   text-align: center;
-  border-radius: 10px;
+  border: 1px solid #888;
 }
 
-#confirmYes {
-  background-color: #4caf50;
-  color: white;
+.modal-content p {
+  color: black;
 }
 
-#confirmNo {
-  background-color: #f44336;
+.modal-content button {
+  width: 7rem;
+  margin: 0;
+  margin-top: 1rem;
+}
+
+/* end pop up */
+
+.end-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fefefe;
+  margin: 20% auto;
+  padding: 20px;
+  width: 100%;
+  max-width: 250px;
+  text-align: center;
+  border: 1px solid #888;
+}
+
+.end-comment {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+#btn-gohome {
+  text-align: center;
+  width: 100px;
+  justify-content: center;
+}
+#btn-gohome:hover {
   color: white;
 }

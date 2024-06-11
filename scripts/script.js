@@ -15,23 +15,6 @@ function addCard(number, value) {
   });
 }
 
-// give an id and img for each cards
-// cards.forEach((card, index) => {
-//   const cardfront = card.querySelector(".front");
-//   card.id = index + 1;
-//   const imgPath = Math.round(card.id / 2);
-//   const img = new Image();
-//   if ((difficulty = "master")) {
-//     console.log("yes");
-//     img.src = `images/img-1/0${imgPath}.png`;
-//   } else {
-//     console.log("no");
-//     img.src = `images/img-2/0${imgPath}.png`;
-//   }
-//   cardfront.appendChild(img);
-//   addCard(card.id, imgPath);
-// });
-
 // random shuffle
 cards.forEach((card) => {
   card.style.order = Math.floor(Math.random() * 100);
@@ -48,12 +31,13 @@ class Player {
 
   getPoint() {
     this.score += 1;
-    if (this.score > 1) {
+    if (this.score > 4) {
       console.log(this.name + "win!");
     }
   }
 }
 
+// set players
 let player = "";
 let computer = "";
 
@@ -82,7 +66,14 @@ function resetSelection() {
 
 // end game
 function endGame() {
-  console.log("game over");
+  document.getElementById("end-popup").style.display = "block";
+  if (player.score > 4) {
+    document.getElementById("end-comment").innerText = "You Win!";
+    // 승리 화면
+  } else {
+    document.getElementById("end-comment").innerText = "You Lose...";
+    // 패배 화면
+  }
 }
 
 // flip card
@@ -137,7 +128,7 @@ function computerTurn() {
 
       // step3 2nd picking after a sec
       setTimeout(() => {
-        if (botFirstPick.count + paircard.count >= 0) {
+        if (botFirstPick.count + paircard.count >= difficultyNumber) {
           // if it has been seen more than 3, direct pick
           botSecondPick = paircard;
           botSecondPickDiv = document.getElementById(
@@ -178,7 +169,7 @@ function computerTurn() {
           }
           // step5 turn over after a sec
           setTimeout(() => {
-            if (player.score + computer.score == 9) {
+            if (player.score > 4 || computer.score > 4) {
               endGame();
             } else {
               turn += 1;
@@ -187,11 +178,11 @@ function computerTurn() {
               resetSelection();
               lockCards = false;
             }
-          }, 100); // step 5
-        }, 100); // step 4
-      }, 100); // step 3
-    }, 100); // step 2
-  }, 100); // step 1
+          }, Math.random() * 2000); // step 5
+        }, Math.random() * 2000); // step 4
+      }, Math.random() * 2000); // step 3
+    }, Math.random() * 2000); // step 2
+  }, Math.random() * 2000); // step 1
 }
 
 //selecting function
@@ -235,7 +226,7 @@ cards.forEach((card) => {
           }, 1000);
         }
         setTimeout(() => {
-          if (player.score + computer.score == 9) {
+          if (player.score > 4 || computer.score > 4) {
             endGame();
           } else {
             turn += 1;
@@ -249,4 +240,4 @@ cards.forEach((card) => {
 });
 
 // for restart
-// window.location.reload("true");
+//
