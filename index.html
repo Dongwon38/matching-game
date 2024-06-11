@@ -90,9 +90,17 @@
           <ul>
             <li><a href="https://www.bcit.ca/">bcit</a></li>
             <li>turn: <span id="turn-board">1</span></li>
+            <li>Course: <span id="level"></span></li>
             <li id="btn-endgame">drop the course</li>
           </ul>
         </nav>
+        <div id="confirmDialog" class="modal">
+          <div class="modal-content">
+            <p>Are you sure you want to continue?</p>
+            <button id="confirmYes">Yes</button>
+            <button id="confirmNo">No</button>
+          </div>
+        </div>
       </header>
       <main>
         <div class="table player">

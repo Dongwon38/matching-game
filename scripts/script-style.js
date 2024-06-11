@@ -50,6 +50,7 @@ const difficultyBox = document.getElementById("difficulty-box");
 const difficultyLines = document.querySelectorAll(".difficulty-line");
 const btnSubmit = document.getElementById("btn-submit");
 const computerPhoto = document.getElementById("computer-photo");
+const level = document.getElementById("level");
 
 // radio event
 profiles.forEach((profile) => {
@@ -83,8 +84,10 @@ btnSubmit.addEventListener("click", () => {
     "master"
   ) {
     difficulty = "master";
+    level.innerHTML = "Master";
   } else {
     difficulty = "doctorate";
+    level.innerHTML = "Doctorate";
   }
 
   cards.forEach((card, index) => {
@@ -168,8 +171,21 @@ const typing = function (text, counter = 0) {
 const btnEndgame = document.getElementById("btn-endgame");
 
 btnEndgame.addEventListener("click", () => {
-  if (confirm("Are you sure?")) {
-    window.location.reload("true");
-  } else {
+  document.getElementById("confirmDialog").style.display = "block";
+});
+
+// confirm
+document.getElementById("confirmYes").addEventListener("click", function () {
+  document.getElementById("confirmDialog").style.display = "none";
+  window.location.reload("true");
+});
+
+document.getElementById("confirmNo").addEventListener("click", function () {
+  document.getElementById("confirmDialog").style.display = "none";
+});
+
+window.addEventListener("click", function (event) {
+  if (event.target === document.getElementById("confirmDialog")) {
+    document.getElementById("confirmDialog").style.display = "none";
   }
 });
