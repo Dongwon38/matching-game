@@ -16,15 +16,21 @@ function addCard(number, value) {
 }
 
 // give an id and img for each cards
-cards.forEach((card, index) => {
-  const cardfront = card.querySelector(".front");
-  card.id = index + 1;
-  const imgPath = Math.round(card.id / 2);
-  const img = new Image();
-  img.src = `images/0${imgPath}.jpg`;
-  cardfront.appendChild(img);
-  addCard(card.id, imgPath);
-});
+// cards.forEach((card, index) => {
+//   const cardfront = card.querySelector(".front");
+//   card.id = index + 1;
+//   const imgPath = Math.round(card.id / 2);
+//   const img = new Image();
+//   if ((difficulty = "master")) {
+//     console.log("yes");
+//     img.src = `images/img-1/0${imgPath}.png`;
+//   } else {
+//     console.log("no");
+//     img.src = `images/img-2/0${imgPath}.png`;
+//   }
+//   cardfront.appendChild(img);
+//   addCard(card.id, imgPath);
+// });
 
 // random shuffle
 cards.forEach((card) => {
@@ -52,8 +58,8 @@ let player = "";
 let computer = "";
 
 function startGame() {
-  player = new Player("test Player");
-  computer = new Player("bot 1.0");
+  player = new Player("player");
+  computer = new Player("computer");
   document.getElementById("player-name").innerHTML = player.name;
   document.getElementById("computer-name").innerHTML = computer.name;
   document.getElementById("player-score").innerHTML = player.score;
@@ -131,7 +137,7 @@ function computerTurn() {
 
       // step3 2nd picking after a sec
       setTimeout(() => {
-        if (botFirstPick.count + paircard.count >= 3) {
+        if (botFirstPick.count + paircard.count >= 0) {
           // if it has been seen more than 3, direct pick
           botSecondPick = paircard;
           botSecondPickDiv = document.getElementById(
@@ -181,11 +187,11 @@ function computerTurn() {
               resetSelection();
               lockCards = false;
             }
-          }, 1000); // step 5
-        }, 1000); // step 4
-      }, 1000); // step 3
-    }, 1000); // step 2
-  }, 1000); // step 1
+          }, 100); // step 5
+        }, 100); // step 4
+      }, 100); // step 3
+    }, 100); // step 2
+  }, 100); // step 1
 }
 
 //selecting function

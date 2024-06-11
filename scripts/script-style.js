@@ -1,3 +1,5 @@
+"use strict";
+
 const btns = document.querySelectorAll(".btn-blue");
 const btnStart = document.getElementById("btn-start");
 const pgStart = document.getElementById("page-start");
@@ -65,6 +67,8 @@ difficultyLines.forEach((line) => {
 });
 
 // submit - info
+let difficulty = "";
+
 btnSubmit.addEventListener("click", () => {
   playerName.innerHTML = inputName.value;
   computerName.innerHTML = teachers.querySelector(
@@ -74,9 +78,30 @@ btnSubmit.addEventListener("click", () => {
     computerPhoto.querySelector("img").src = "images/ui/randy-0.jpg";
   }
   //select difficulty
-  console.log(
-    difficultyBox.querySelector('input[name="difficulty"]:checked').value
-  );
+  if (
+    difficultyBox.querySelector('input[name="difficulty"]:checked').value ==
+    "master"
+  ) {
+    difficulty = "master";
+  } else {
+    difficulty = "doctorate";
+  }
+
+  cards.forEach((card, index) => {
+    const cardfront = card.querySelector(".front");
+    card.id = index + 1;
+    const imgPath = Math.round(card.id / 2);
+    const img = new Image();
+    if (difficulty == "master") {
+      console.log("yes");
+      img.src = `images/img-1/0${imgPath}.png`;
+    } else {
+      console.log("no");
+      img.src = `images/img-2/0${imgPath}.png`;
+    }
+    cardfront.appendChild(img);
+    addCard(card.id, imgPath);
+  });
 
   // change page
   pgRegister.classList.remove("fade-in");
@@ -115,14 +140,29 @@ const txtRandy = [
   "Does that make sense?",
 ];
 
+// text pop up
 function txtPopUp(computer) {
   txtContainer.classList.add("txtpopup");
-  txtContent.innerHTML =
-    computer[Math.floor(Math.random() * (computer.length - 0))];
+  let text = computer[Math.floor(Math.random() * computer.length)];
+  setTimeout(() => {
+    typing(text);
+  }, 1000);
   setTimeout(() => {
     txtContainer.classList.remove("txtpopup");
-  }, 3000);
+    txtContent.textContent = "";
+  }, 6000);
 }
+
+// typo effect
+const typing = function (text, counter = 0) {
+  setInterval(() => {
+    if (text.length === counter) {
+      return;
+    }
+    txtContent.textContent += text[counter];
+    counter++;
+  }, 70);
+};
 
 // end btn
 const btnEndgame = document.getElementById("btn-endgame");
