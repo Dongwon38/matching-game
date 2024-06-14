@@ -5,6 +5,7 @@ const cards = document.querySelectorAll(".card");
 const allCards = [];
 const turnBoard = document.getElementById("turn-board");
 let turn = 1;
+let currentTurn = "player";
 
 function addCard(number, value) {
   allCards.push({
@@ -32,7 +33,7 @@ class Player {
   getPoint() {
     this.score += 1;
     if (this.score > 4) {
-      console.log(this.name + "win!");
+      logBox.innerHTML += `<p>${this.name} win!</p>`;
     }
   }
 }
@@ -93,6 +94,7 @@ function unflipCard(card) {
 
 //computer turn
 function computerTurn() {
+  currentTurnShowing("computer");
   // step1 set card deck for picking
   setTimeout(() => {
     let cardDeck = [];
@@ -149,7 +151,7 @@ function computerTurn() {
         // step4 comparison after a sec
         setTimeout(() => {
           if (botFirstPick.cardValue == botSecondPick.cardValue) {
-            console.log("computer got one point");
+            logBox.innerHTML += `<p>computer got one point.</p>`;
             botFirstPick.isOpen = true;
             botSecondPick.isOpen = true;
             computer.getPoint();
@@ -161,7 +163,7 @@ function computerTurn() {
             document.getElementById("computer-score").innerHTML =
               computer.score;
           } else {
-            console.log("computer got no point");
+            logBox.innerHTML += `<p>computer got no point.</p>`;
             botFirstPick.count += 1;
             botSecondPick.count += 1;
             unflipCard(document.getElementById(`${botFirstPick.cardNumber}`));
@@ -174,7 +176,8 @@ function computerTurn() {
             } else {
               turn += 1;
               turnBoard.innerText = turn;
-              console.log("now your turn");
+              logBox.innerHTML += `<p>now your turn.</p>`;
+              currentTurnShowing("player");
               resetSelection();
               lockCards = false;
             }
@@ -205,7 +208,7 @@ cards.forEach((card) => {
       // comparison
       setTimeout(() => {
         if (firstCard.cardValue === secondCard.cardValue) {
-          console.log("You got one point");
+          logBox.innerHTML += `<p>You got one point!</p>`;
           firstCard.isOpen = true;
           secondCard.isOpen = true;
           player.getPoint();
@@ -213,7 +216,7 @@ cards.forEach((card) => {
           resetSelection();
           lockCards = true;
         } else {
-          console.log("You were wrong");
+          logBox.innerHTML += `<p>You got no point.</p>`;
           // count
           firstCard.count += 1;
           secondCard.count += 1;
@@ -230,7 +233,7 @@ cards.forEach((card) => {
             endGame();
           } else {
             turn += 1;
-            console.log("now computer turn");
+            logBox.innerHTML += `<p>Now computer is playing.</p>`;
             computerTurn();
           }
         }, 1000);

@@ -6,6 +6,7 @@ const pgStart = document.getElementById("page-start");
 const pgRegister = document.getElementById("page-register");
 const pgInGame = document.getElementById("page-in-game");
 const btnLists = document.querySelectorAll("header li");
+const logBox = document.getElementById("log-box");
 
 // btn hover
 btns.forEach((btn) => {
@@ -86,11 +87,11 @@ btnSubmit.addEventListener("click", () => {
   ) {
     difficulty = "certificate";
     level.innerHTML = "Certificate";
-    difficultyNumber = "2";
+    difficultyNumber = "3";
   } else {
     difficulty = "master";
     level.innerHTML = "Master";
-    difficultyNumber = "1";
+    difficultyNumber = "2";
   }
 
   cards.forEach((card, index) => {
@@ -99,10 +100,8 @@ btnSubmit.addEventListener("click", () => {
     const imgPath = Math.round(card.id / 2);
     const img = new Image();
     if (difficulty == "certificate") {
-      console.log("yes");
       img.src = `images/img-1/0${imgPath}.png`;
     } else {
-      console.log("no");
       img.src = `images/img-2/0${imgPath}.png`;
     }
     cardfront.appendChild(img);
@@ -198,3 +197,24 @@ const btngoHome = document.getElementById("btn-gohome");
 btngoHome.addEventListener("click", () => {
   window.location.reload("true");
 });
+
+const turnbar = document.getElementById("turnbar");
+const turnbarImgPlayer = document.getElementById("turnbar-img-player");
+const turnbarImgCom = document.getElementById("turnbar-img-com");
+turnbarImgCom.style.visibility = "hidden";
+
+// to show current turn
+function currentTurnShowing(currentTurn) {
+  turnbarImgPlayer.style.visibility = "hidden";
+  turnbarImgCom.style.visibility = "hidden";
+
+  if (currentTurn == "player") {
+    setTimeout(() => {
+      turnbarImgPlayer.style.visibility = "visible";
+    }, 500);
+  } else {
+    setTimeout(() => {
+      turnbarImgCom.style.visibility = "visible";
+    }, 500);
+  }
+}
