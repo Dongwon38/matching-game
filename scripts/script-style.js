@@ -69,8 +69,8 @@ difficultyLines.forEach((line) => {
 });
 
 // submit - info
-let difficulty = "";
-let difficultyNumber = "2";
+let difficulty;
+let difficultyNumber;
 
 btnSubmit.addEventListener("click", () => {
   playerName.innerHTML = inputName.value;
@@ -87,11 +87,11 @@ btnSubmit.addEventListener("click", () => {
   ) {
     difficulty = "certificate";
     level.innerHTML = "Certificate";
-    difficultyNumber = "3";
+    difficultyNumber = "4";
   } else {
     difficulty = "master";
     level.innerHTML = "Master";
-    difficultyNumber = "2";
+    difficultyNumber = "3";
   }
 
   cards.forEach((card, index) => {
@@ -134,6 +134,7 @@ const txtMichael = [
   "It is what it is.",
   "What the hack!!!",
   "Don't ask me why.",
+  "Learn XD, then you will get a job."
 ];
 
 const txtRandy = [

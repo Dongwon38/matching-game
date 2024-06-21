@@ -114,7 +114,6 @@ function computerTurn() {
       botFirstPick = cardDeck[Math.floor(Math.random() * cardDeck.length)];
       botFirstPickDiv = document.getElementById(`${botFirstPick.cardNumber}`);
       flipCard(botFirstPickDiv);
-      console.log("1st pick:", botFirstPick);
 
       //remove first picked card from array
       cardDeck = cardDeck.filter(
@@ -181,10 +180,10 @@ function computerTurn() {
               resetSelection();
               lockCards = false;
             }
-          }, Math.random() * 2000); // step 5
-        }, Math.random() * 2000); // step 4
-      }, Math.random() * 2000); // step 3
-    }, Math.random() * 2000); // step 2
+          }, 1000); // step 5
+        }, 2500); // step 4
+      }, Math.random() * 2000 + 500); // step 3
+    }, Math.random() * 2000 + 500); // step 2
   }, Math.random() * 2000); // step 1
 }
 
@@ -232,7 +231,6 @@ cards.forEach((card) => {
           if (player.score > 4 || computer.score > 4) {
             endGame();
           } else {
-            turn += 1;
             logBox.innerHTML += `<p>Now computer is playing.</p>`;
             computerTurn();
           }
@@ -241,6 +239,3 @@ cards.forEach((card) => {
     }
   });
 });
-
-// for restart
-//
